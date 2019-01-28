@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js"></script>
+</head>
+
+
+<body>
+    <div style="width:100%;">
+        <canvas id="myChart"></canvas>
+    </div>
+    <script>
+	var chart= document.getElementById("myChart").getContext('2d');
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+    	if (this.readyState == 4 && this.status == 200) {
+			j_data = JSON.parse(this.responseText);
+			var x = j_data.x;
+			var y = j_data.y;
+			var curYear = "2016";
+			var predIndex = x.indexOf(curYear);
+			var dat1 = y.slice(0,predIndex+1);
+			var dat2 = []
+			for(var i=0; i<predIndex; i++){
+				dat2 = dat2.concat([,]);
+			}
+			dat2 = dat2.concat(y.slice(predIndex));
+
+
+			var lineChartData = {
+				labels:x,
+				datasets:[
+				{
+            		label: 'data',
+            		data:dat1,
+            		backgroundColor: 'gray',
+            		borderColor: 'gray',
+            		borderWidth: 1,
+					fill:false
+        		},
+				{
+            		label: 'prediction',
+            		data:dat2,
+            		backgroundColor: 'red',
+            		borderColor: 'red',
+            		borderWidth: 1,
+					fill:false
+				}
+				]
+			}	
+
+			var config = {
+            	type: 'line',
+				data:lineChartData,
+				options: {
+                	responsive: true,
+                	title:{
+                	    display:true,
+                	    text:'Employmentation Trend'
+                	},
+                	tooltips: {
+                	    mode: 'index',
+                	    intersect: false,
+                	},
+                	hover: {
+                	    mode: 'nearest',
+                	    intersect: true
+                	},
+					elements: { 
+						point: { radius: 0 } 
+					},
+                	scales: {
+                	    xAxes: [{
+                	        display: true,
+                	        scaleLabel: {
+                	            display: true,
+                	            labelString: 'Year'
+                	        }
+                	    }],
+                	    yAxes: [{
+                	        display: true,
+                	        scaleLabel: {
+                	            display: true,
+                	            labelString: 'Population'
+                	        }
+                	    }]
+                	}
+				}
+            }
+
+			var myChart = new Chart(chart, config);
+    	}
+	}
+	xhttp.open("GET", "Financeandinsurance.json", true);
+	xhttp.send()
+
+    </script>
+</body>
+
+
+
+</html>
