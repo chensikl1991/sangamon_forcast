@@ -1,4 +1,4 @@
-webpackJsonp([0],[
+﻿webpackJsonp([0],[
 /* 0 */,
 /* 1 */,
 /* 2 */
@@ -19410,7 +19410,7 @@ var Home = function (_Component) {
                   _react2.default.createElement(
                     _semanticUiReact.Table.Cell,
                     null,
-                    _react2.default.createElement('iframe', { className: 'chart', src: '/leam_historical_and_forecast.github.io/assets/' + item["name"].split(' ').join('') + '.html' })
+                    _react2.default.createElement('iframe', { className: 'chart', src: 'assets/' + item["name"].split(' ').join('') + '.html' })
                   )
                 ) : null;
               })
